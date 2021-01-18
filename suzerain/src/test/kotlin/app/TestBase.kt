@@ -24,6 +24,7 @@ object TestBase {
 
     fun carServiceHost():String = "${getProperty("service.car-service.url")}:${getProperty("service.car-service.port")}"
     fun foodServiceHost():String = "${getProperty("service.food-service.url")}:${getProperty("service.food-service.port")}"
+    fun catsServiceHost():String = "${getProperty("service.cats.url")}:${getProperty("service.cats.port")}"
 
     fun validateProperties() {
 

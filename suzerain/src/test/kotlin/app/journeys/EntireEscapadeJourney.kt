@@ -3,6 +3,7 @@ package app.journeys
 import app.Journey
 import app.functions.CarServiceFunctions
 import app.functions.FoodServiceFunctions
+import app.functions.CatsServiceFunctions
 import app.util.objectMapperFactory
 import io.kotlintest.matchers.gt
 import io.kotlintest.matchers.lt
@@ -40,6 +41,11 @@ class EntireEscapadeJourney : FeatureSpec() {
 
                 JsonPath.from(windowResponse).using(objectMapperFactory).getBoolean("[0].burger_correct") shouldBe true
                 JsonPath.from(windowResponse).using(objectMapperFactory).getLong("[0].time_taken") shouldBe lt(60000)
+
+                val factsResponse = CatsServiceFunctions.getFacts()
+                factsResponse shouldNotBe null
+                JsonPath.from(factsResponse).using(objectMapperFactory).getBoolean("[0].status.verified") shouldBe true
+                JsonPath.from(factsResponse).using(objectMapperFactory).getLong("[0].status.sentCount") shouldBe gt(0)
 
             }.config(tags = setOf(Journey))
 
